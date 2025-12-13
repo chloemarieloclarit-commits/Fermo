@@ -2,9 +2,8 @@ import express from 'express';
 import { dbConnection } from './config/db_access.js';
 import {config as dotenvConfig} from 'dotenv';
 import fs from 'fs';
-
 import deviceRouter from './routers/device.router.js';
-
+import checkOfflineDevices from './functions/checkOfflineDevices.js';
 const app = express();
 app.use(express.json());
 
@@ -18,11 +17,13 @@ const secretPath =
 dotenvConfig({path: secretPath});
 
 
-app.use("/device", deviceRouter);
+
 
 app.get("/",(req, res) =>{
     res.json({message: "Server is working!"})
 });
+app.use("/device", deviceRouter);
+setInterval(checkOfflineDevices, 30000);
 
 app.listen(PORT, ()=>{
     dbConnection();
