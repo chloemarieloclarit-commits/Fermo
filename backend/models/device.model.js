@@ -13,10 +13,61 @@ const DeviceSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0
-    }
-   
+    },
+    
+   pH: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
 
-});
+    temperature: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+
+    containerType: {
+      type: String,
+      default: "Clay Jar",
+    },
+
+    fermentationStage: {
+      type: Number, 
+      default: 1,
+    },
+
+    stageDescription: {
+      type: String,
+      default: "Initial Fermentation",
+    },
+
+    alerts: [
+      {
+        message: { type: String },
+        date: { type: Date, default: Date.now },
+      },
+    ],
+
+    
+    pHTrend: [
+      {
+        value: Number,
+        timestamp: Number,
+      },
+    ],
+
+    temperatureTrend: [
+      {
+        value: Number,
+        timestamp: Number,
+      },
+    ],
+  },
+  { timestamps: true }
+
+);
+
 
 const Device = mongoose.model('Device', DeviceSchema);
 
