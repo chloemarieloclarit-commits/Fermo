@@ -4,7 +4,9 @@ import axiosInstance from '../axiosConfig.js';
 
 
 export default function FermentationScreen() {
+ 
   const [data, setData] = useState();
+  
 useEffect(()=>{
   const func=async()=>{
  try{
